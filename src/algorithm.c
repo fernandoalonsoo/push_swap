@@ -16,29 +16,32 @@ static t_node	*get_cheapest(t_node *st);
 static void		push_to(t_stacks *st, char stack_name);
 static void		last_order(t_stacks *st);
 
-void	turk_algorithm(t_stacks *st)
+void	turk_algorithm(t_stacks *st, int len_a)
 {
-	if (st->size_a <= 5)
+	int	len_b;
+
+	if (len_a <= 5)
 	{
 		optimize(st);
 		return ;
 	}
-	if (st -> size_a > 3 && !ordered(st ->a))
+	if (len_a-- > 3 && !ordered(st ->a))
 		push_b(st);
-	if (st -> size_a > 3 && !ordered(st ->a))
+	if (len_a-- > 3 && !ordered(st ->a))
 		push_b(st);
-	while (st -> size_a > 3 && !ordered(st ->a))
+	while (len_a-- > 3 && !ordered(st ->a))
 	{
 		calculate_scores(st);
 		push_to(st, 'b');
 	}
-	optimize(st);
-	while (st -> size_b != 0)
+	sort_3(st);
+	len_b = stack_len(st->b);
+	while (len_b-- != 0)
 	{
 		get_nodes_b(st);
 		push_to(st, 'a');
 	}
-	get_index(st->a, st->size_a);
+	get_index(st->a);
 	last_order(st);
 }
 
@@ -86,8 +89,8 @@ static void	last_order(t_stacks *st)
 	{
 		min = find_min(st->a);
 		if (min->top_median)
-			rotate_a(st);
+			rotate_a(st, 1);
 		else
-			reverse_rotate_a(st);
+			reverse_rotate_a(st, 1);
 	}
 }

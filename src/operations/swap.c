@@ -52,9 +52,9 @@ void	swap_b(t_stacks *st)
 
 void	ss(t_stacks *st)
 {
-	if (st->size_a > 1)
+	if (stack_len(st->a) > 1)
 		swap_a(st);
-	if (st->size_b > 1)
+	if (stack_len(st->b) > 1)
 		swap_b(st);
 	ft_print_string("ss\n");
 }

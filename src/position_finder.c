@@ -17,8 +17,8 @@ t_node		*find_min(t_node *st);
 
 void	get_nodes_b(t_stacks *st)
 {
-	get_index(st->a, st->size_a);
-	get_index(st->b, st->size_b);
+	get_index(st->a);
+	get_index(st->b);
 	set_target_b(st->a, st->b);
 }
 

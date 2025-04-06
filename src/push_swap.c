@@ -19,7 +19,9 @@ void	free_memory(t_stacks *st, char **array, int free_array_flag);
 
 /*void	print_stack(t_node *stack)
 {
-	t_node	*current = stack;
+	t_node	*current;
+
+	current = stack;
 	while (current)
 	{
 		printf("%d ", current->n);
@@ -51,7 +53,7 @@ int	main(int argc, char *argv[])
 	initialise_stacks(&st, n, array);
 	repeated(st.a);
 	if (!ordered(st.a))
-		turk_algorithm(&st);
+		turk_algorithm(&st, stack_len(st.a));
 	free_memory(&st, array, free_array_flag);
 	return (0);
 }
@@ -65,8 +67,6 @@ void	initialise_stacks(t_stacks *st, int n, char **array)
 
 	st->a = NULL;
 	st->b = NULL;
-	st->size_a = n;
-	st->size_b = 0;
 	prev_node = NULL;
 	i = 0;
 	while (i < n)

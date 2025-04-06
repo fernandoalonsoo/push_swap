@@ -12,48 +12,36 @@
 
 #include "../push_swap.h"
 
-static void		sort_3(t_stacks *st);
+void		sort_3(t_stacks *st);
 static void		sort_4_or_5(t_stacks *st);
 static t_node	*find_min_node(t_stacks *st);
 static void		move_min_to_top(t_stacks *st, t_node *min_node);
 
 void	optimize(t_stacks *st)
 {
-	if (st->size_a == 2)
+	if (stack_len(st->a) == 2)
 	{
 		if (st->a->n > st->a->next->n)
 			swap_a(st);
 	}
-	else if (st->size_a == 3)
+	else if (stack_len(st->a) == 3)
 		sort_3(st);
-	else if (st->size_a <= 5)
+	else if (stack_len(st->a) <= 5)
 		sort_4_or_5(st);
 }
 
 /* Ordenar 3 elementos */
-static void	sort_3(t_stacks *st)
+void sort_3(t_stacks *st)
 {
-	t_node	*first;
-	t_node	*second;
-	t_node	*third;
+    t_node *biggest_node;
 
-	first = st->a;
-	second = first->next;
-	third = second->next;
-	if (first->n > second->n && first->n > third->n)
-	{
-		rotate_a(st);
-		if (st->a->n > st->a->next->n)
-			swap_a(st);
-	}
-	else if (second->n > first->n && second->n > third->n)
-	{
-		reverse_rotate_a(st);
-		if (st->a->n > st->a->next->n)
-			swap_a(st);
-	}
-	else if (first->n > second->n)
-		swap_a(st);
+    biggest_node = find_max(st->a);
+    if (biggest_node == st->a)
+        rotate_a(st, 1);
+    else if (st->a->next == biggest_node)
+        reverse_rotate_a(st, 1);
+    if (st->a->n > st->a->next->n)
+        swap_a(st);
 }
 
 /* Encontrar el nodo con el menor valor */
@@ -81,7 +69,7 @@ static void	move_min_to_top(t_stacks *st, t_node *min_node)
 	t_node	*current;
 
 	pos = 0;
-	half_size = st->size_a / 2;
+	half_size = stack_len(st->a) / 2;
 	current = st->a;
 	while (current && current != min_node)
 	{
@@ -91,12 +79,12 @@ static void	move_min_to_top(t_stacks *st, t_node *min_node)
 	if (pos <= half_size)
 	{
 		while (st->a != min_node)
-			rotate_a(st);
+			rotate_a(st, 1);
 	}
 	else
 	{
 		while (st->a != min_node)
-			reverse_rotate_a(st);
+			reverse_rotate_a(st, 1);
 	}
 }
 
@@ -105,13 +93,13 @@ static void	sort_4_or_5(t_stacks *st)
 {
 	t_node	*min_node;
 
-	while (st->size_a > 3)
+	while (stack_len(st->a) > 3)
 	{
 		min_node = find_min_node(st);
 		move_min_to_top(st, min_node);
 		push_b(st);
 	}
 	sort_3(st);
-	while (st->size_b > 0)
+	while (stack_len(st->b) > 0)
 		push_a(st);
 }

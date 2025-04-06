@@ -12,21 +12,21 @@
 
 #include "../push_swap.h"
 
-void		get_index(t_node *st, int len);
+void		get_index(t_node *st);
 static void	set_target_a(t_node *a, t_node *b);
 static void	score_calculator(t_stacks *st);
 static void	set_cheapest(t_node *st);
 
 void	calculate_scores(t_stacks *st)
 {
-	get_index(st -> a, st -> size_a);
-	get_index(st -> b, st -> size_b);
+	get_index(st -> a);
+	get_index(st -> b);
 	set_target_a(st -> a, st -> b);
 	score_calculator(st);
 	set_cheapest(st->a);
 }
 
-void	get_index(t_node *st, int len)
+void	get_index(t_node *st)
 {
 	int	i;
 	int	median;
@@ -34,7 +34,7 @@ void	get_index(t_node *st, int len)
 	i = 0;
 	if (!st)
 		return ;
-	median = len / 2;
+	median = stack_len(st) / 2;
 	while (st)
 	{
 		st->index = i;
@@ -80,8 +80,8 @@ static void	score_calculator(t_stacks *st)
 	int		len_b;
 	t_node	*ptr;
 
-	len_a = st->size_a;
-	len_b = st->size_b;
+	len_a = stack_len(st->a);
+	len_b = stack_len(st->b);
 	ptr = st->a;
 	while (ptr)
 	{

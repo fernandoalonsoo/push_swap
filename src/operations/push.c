@@ -26,8 +26,6 @@ void	push_a(t_stacks *st)
 	if (st->a)
 		st->a->prev = temp;
 	st->a = temp;
-	st->size_a++;
-	st->size_b--;
 	ft_print_string("pa\n");
 }
 
@@ -45,7 +43,5 @@ void	push_b(t_stacks *st)
 	if (st->b)
 		st->b->prev = temp;
 	st->b = temp;
-	st->size_a--;
-	st->size_b++;
 	ft_print_string("pb\n");
 }

@@ -56,3 +56,18 @@ int	ordered(t_node *a)
 	}
 	return (1);
 }
+
+int	stack_len(t_node *stack)
+{
+	int	count;
+
+	if (!stack)
+		return (0);
+	count = 0;
+	while (stack)
+	{
+		stack = stack->next;
+		count++;
+	}
+	return (count);
+}
