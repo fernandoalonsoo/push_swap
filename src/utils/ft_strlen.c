@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_number.c                                  :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fealonso <fealonso@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: fealonso <fealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 10:58:16 by fealonso          #+#    #+#             */
-/*   Updated: 2024/12/29 12:23:20 by fernando         ###   ########.fr       */
+/*   Created: 2024/09/17 15:36:35 by fealonso          #+#    #+#             */
+/*   Updated: 2024/09/18 18:27:42 by fealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_print_number(int n)
-{
-	char	*str;
-	int		len;
+#include "utils.h"
 
-	str = ft_itoa(n);
-	len = ft_print_string(str);
-	free(str);
-	return (len);
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }

@@ -1,16 +1,25 @@
 
-NAME = push_swap.a
+NAME = push_swap
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS =		src/push_swap \
-			src/initialise_stacks.c \
-			src/utils/ft_atoi.c \
+	SRCS = 	src/push_swap.c \
+			src/validation_functions.c \
+			src/algorithm.c \
+			src/optimize.c \
+			src/score_calculator.c \
+			src/moves.c \
+			src/position_finder.c \
+			src/operations/push.c \
+			src/operations/rotate.c \
+			src/operations/reverse_rotate.c \
+			src/operations/swap.c \
+			src/utils/ft_atol.c \
 			src/utils/ft_print_char.c \
-			src/utils/ft_print_number.c \
 			src/utils/ft_print_string.c \
-
+			src/utils/ft_strlen.c \
+			src/utils/ft_split.c
 
 BONUSSRCS = 
 
@@ -21,10 +30,10 @@ BONUSOBJS = $(BONUSSRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 bonus: $(OBJS) $(BONUSOBJS)
-	ar rcs $(NAME) $(OBJS) $(BONUSOBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

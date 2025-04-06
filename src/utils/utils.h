@@ -13,11 +13,14 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-#include "../../push_swap.h"
+# include "../../push_swap.h"
+# include <stddef.h>
 
-int	ft_atoi(const char *str);
-int	ft_print_char(char c);
-int	ft_print_number(int n);
-int	ft_print_string(const char *str);
+long	ft_atol(const char *str);
+int		ft_print_char(char c);
+int		ft_print_number(int n);
+int		ft_print_string(const char *str);
+char	**ft_split(char const *s, char c, int *n);
+size_t	ft_strlen(const char *s);
 
 #endif
