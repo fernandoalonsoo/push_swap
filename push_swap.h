@@ -43,6 +43,7 @@ void	repeated(t_node *a);
 void	check_range(long a);
 int		ordered(t_node *a);
 int		stack_len(t_node *stack);
+void	ft_error_exit(char *msg, int fd);
 
 /* Algoritmo */
 void	optimize(t_stacks *st);
@@ -59,7 +60,7 @@ void	prep_for_push(t_stacks *st, t_node *top_node, char stack_name);
 void	get_nodes_b(t_stacks *st);
 t_node	*find_min(t_node *st);
 t_node	*find_max(t_node *stack);
-void		sort_3(t_stacks *st);
+void	sort_3(t_stacks *st);
 
 /* Operaciones de PUSH */
 void	push_a(t_stacks *st);

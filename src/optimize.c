@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void		sort_3(t_stacks *st);
+void			sort_3(t_stacks *st);
 static void		sort_4_or_5(t_stacks *st);
 static t_node	*find_min_node(t_stacks *st);
 static void		move_min_to_top(t_stacks *st, t_node *min_node);
@@ -31,17 +31,17 @@ void	optimize(t_stacks *st)
 }
 
 /* Ordenar 3 elementos */
-void sort_3(t_stacks *st)
+void	sort_3(t_stacks *st)
 {
-    t_node *biggest_node;
+	t_node	*biggest_node;
 
-    biggest_node = find_max(st->a);
-    if (biggest_node == st->a)
-        rotate_a(st, 1);
-    else if (st->a->next == biggest_node)
-        reverse_rotate_a(st, 1);
-    if (st->a->n > st->a->next->n)
-        swap_a(st);
+	biggest_node = find_max(st->a);
+	if (biggest_node == st->a)
+		rotate_a(st, 1);
+	else if (st->a->next == biggest_node)
+		reverse_rotate_a(st, 1);
+	if (st->a->n > st->a->next->n)
+		swap_a(st);
 }
 
 /* Encontrar el nodo con el menor valor */

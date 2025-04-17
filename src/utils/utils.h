@@ -22,5 +22,6 @@ int		ft_print_number(int n);
 int		ft_print_string(const char *str);
 char	**ft_split(char const *s, char c, int *n);
 size_t	ft_strlen(const char *s);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

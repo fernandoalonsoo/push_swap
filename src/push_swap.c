@@ -16,6 +16,7 @@
 void	initialise_stacks(t_stacks *st, int n, char **array);
 void	initialise_values(t_node *new_node, long aux, t_node *prev_node);
 void	free_memory(t_stacks *st, char **array, int free_array_flag);
+void	ft_error_exit(char *msg, int fd);
 
 /*void	print_stack(t_node *stack)
 {
@@ -123,4 +124,13 @@ void	free_memory(t_stacks *st, char **array, int free_array_flag)
 		st->b = st->b->next;
 		free(temp);
 	}
+}
+
+void	ft_error_exit(char *msg, int fd)
+{
+	if (fd == 1)
+		ft_print_string(msg);
+	else
+		ft_putstr_fd(msg, 2);
+	exit(0);
 }

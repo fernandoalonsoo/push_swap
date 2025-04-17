@@ -10,58 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "checker.h"
 
-void	repeated(t_node *a)
+void	repeated(int *a, int size)
 {
-	t_node	*current;
-	t_node	*checker;
+	int	i;
+	int	j;
 
-	current = a;
-	while (current)
+	i = 0;
+	while (i < size)
 	{
-		checker = current->next;
-		while (checker)
+		j = i + 1;
+		while (j < size)
 		{
-			if (current->n == checker->n)
+			if (a[i] == a[j])
 				ft_error_exit("Error\n", 2);
-			checker = checker->next;
+			j++;
 		}
-		current = current->next;
+		i++;
 	}
 }
 
 void	check_range(long a)
 {
-	if ((a < -2147483648) || (2147483647 < a))
+	if ((a < -2147483648) || (a > 2147483647))
 		ft_error_exit("Error\n", 2);
 }
 
-int	ordered(t_node *a)
+int	ordered(int *a, int size)
 {
-	t_node	*p;
+	int	i;
 
-	p = a;
-	while (p && p->next)
+	i = 0;
+	while (i < size - 1)
 	{
-		if (p->n > p->next->n)
+		if (a[i] > a[i + 1])
 			return (0);
-		p = p->next;
+		i++;
 	}
 	return (1);
-}
-
-int	stack_len(t_node *stack)
-{
-	int	count;
-
-	if (!stack)
-		return (0);
-	count = 0;
-	while (stack)
-	{
-		stack = stack->next;
-		count++;
-	}
-	return (count);
 }

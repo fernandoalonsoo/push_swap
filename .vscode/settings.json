@@ -1,7 +1,11 @@
 {
 	"files.associations": {
-		"push_swap.h": "c",
-		"random": "c",
-		"stddef.h": "c"
+		"checker.h": "c",
+		"array": "c",
+		"string_view": "c",
+		"format": "c",
+		"initializer_list": "c",
+		"span": "c",
+		"get_next_line.h": "c"
 	}
 }
