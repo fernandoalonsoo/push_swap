@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fernando <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 10:42:49 by fernando          #+#    #+#             */
+/*   Updated: 2025/04/17 10:42:51 by fernando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "checker.h"
 
-void 	initialise_stacks(int n, char **array, int *a, int *b);
+void	initialise_stacks(int n, char **array, int *a, int *b);
 void	free_memory(int **a, int **b, char **array, int free_array_flag);
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	int		*a;
 	int		*b;
@@ -33,10 +44,10 @@ int main(int argc, char *argv[])
 	return (0);
 }
 
-void initialise_stacks(int n, char **array, int *a, int *b)
+void	initialise_stacks(int n, char **array, int *a, int *b)
 {
-	int i;
-	long aux;
+	int		i;
+	long	aux;
 
 	i = 0;
 	repeated(a, n);

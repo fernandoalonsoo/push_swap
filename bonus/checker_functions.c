@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_functions.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fernando <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 10:41:31 by fernando          #+#    #+#             */
+/*   Updated: 2025/04/17 10:41:34 by fernando         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "checker.h"
 
-void	do_operation(char *line, int *a, int *b, 
+void	do_operation(char *line, int *a, int *b,
 			int *size_a, int *size_b);
 int		ft_strncmp(const char *s1, const char *s2);
 
-void checker(int *a, int *b, int n)
+void	checker(int *a, int *b, int n)
 {
 	char	*line;
 	int		size_a;
@@ -16,7 +27,7 @@ void checker(int *a, int *b, int n)
 	line = get_next_line(1);
 	while (line)
 	{
-		do_operation(line, a, b, &size_a, &size_b);	
+		do_operation(line, a, b, &size_a, &size_b);
 		line = get_next_line(1);
 	}
 	if (ordered(a, size_a) && size_b == 0)
@@ -25,7 +36,7 @@ void checker(int *a, int *b, int n)
 		ft_print_string("KO\n");
 }
 
-void do_operation(char *line, int *a, int *b, int *size_a, int *size_b)
+void	do_operation(char *line, int *a, int *b, int *size_a, int *size_b)
 {
 	if (ft_strncmp(line, "pa\n"))
 		pa(a, size_a, b, size_b);

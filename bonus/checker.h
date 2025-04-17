@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include "./get_next_line/get_next_line.h"
 
-void checker(int *a, int *b, int n);
+void	checker(int *a, int *b, int n);
 
 /* Validation */
 void	repeated(int *a, int size);
