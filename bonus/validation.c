@@ -12,39 +12,39 @@
 
 #include "checker.h"
 
-void	repeated(int *a, int size)
+void	repeated(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < size)
+	while (i < data->size_a)
 	{
 		j = i + 1;
-		while (j < size)
+		while (j < data->size_a)
 		{
-			if (a[i] == a[j])
-				ft_error_exit("Error\n", 2);
+			if (data->a[i] == data->a[j])
+				exit_error(data);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	check_range(long a)
+void	check_range(long a, t_data *data)
 {
 	if ((a < -2147483648) || (a > 2147483647))
-		ft_error_exit("Error\n", 2);
+		exit_error(data);
 }
 
-int	ordered(int *a, int size)
+int	ordered(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (i < size - 1)
+	while (i < data-> size_a - 1)
 	{
-		if (a[i] > a[i + 1])
+		if (data->a[i] > data->a[i + 1])
 			return (0);
 		i++;
 	}

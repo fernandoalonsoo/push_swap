@@ -22,7 +22,7 @@
 # include <stdlib.h>
 
 // Prototipo de la funcion principal
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, char **remainder);
 
 // Prototipo de funciones extra
 size_t	ft_strlen(const char *s);

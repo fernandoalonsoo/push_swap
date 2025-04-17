@@ -12,77 +12,77 @@
 
 #include "checker.h"
 
-void	initialise_stacks(int n, char **array, int *a, int *b);
-void	free_memory(int **a, int **b, char **array, int free_array_flag);
+void	initialise_stacks(t_data *data);
+void	free_memory(t_data *data);
+void	exit_error(t_data *data);
 
 int	main(int argc, char *argv[])
 {
-	int		*a;
-	int		*b;
-	char	**array;
-	int		free_array_flag;
-	int		n;
+	t_data	data;
 
+	data.a = NULL;
+	data.b = NULL;
+	data.array = NULL;
+	data.free_array_flag = 0;
+	data.size_a = 0;
 	if (argc == 1)
 		exit(0);
 	if (argc == 2)
 	{
-		array = ft_split(argv[1], ' ', &n);
-		free_array_flag = 1;
+		data.array = ft_split(argv[1], ' ', &data.size_a);
+		data.free_array_flag = 1;
 	}
 	else
 	{
-		n = argc - 1;
-		array = argv + 1;
-		free_array_flag = 0;
+		data.size_a = argc - 1;
+		data.array = argv + 1;
 	}
-	a = malloc(sizeof(int) * n);
-	b = malloc(sizeof(int) * n);
-	initialise_stacks(n, array, a, b);
-	checker(a, b, n);
-	free_memory(&a, &b, array, free_array_flag);
+	data.a = malloc(sizeof(int) * data.size_a);
+	data.b = malloc(sizeof(int) * data.size_a);
+	initialise_stacks(&data);
+	checker(&data);
+	free_memory(&data);
 	return (0);
 }
 
-void	initialise_stacks(int n, char **array, int *a, int *b)
+void	initialise_stacks(t_data *data)
 {
 	int		i;
 	long	aux;
 
 	i = 0;
-	while (i < n)
+	data -> size_b = 0;
+	while (i < data->size_a)
 	{
-		aux = ft_atol(array[i]);
-		check_range(aux);
-		a[i] = (int)aux;
-		b[i] = 0;
+		aux = ft_atol(data->array[i]);
+		check_range(aux, data);
+		data->a[i] = (int)aux;
+		data->b[i] = 0;
 		i++;
 	}
-	repeated(a, n);
+	repeated(data);
 }
 
-void	free_memory(int **a, int **b, char **array, int free_array_flag)
+void	free_memory(t_data *data)
 {
 	int	i;
 
-	if (free_array_flag && array)
+	if (data->free_array_flag && data->array)
 	{
 		i = 0;
-		while (array[i])
-		{
-			free(array[i]);
-			i++;
-		}
-		free(array);
+		while (data->array[i])
+			free(data->array[i++]);
+		free(data->array);
 	}
-	if (a && *a)
-	{
-		free(*a);
-		*a = NULL;
-	}
-	if (b && *b)
-	{
-		free(*b);
-		*b = NULL;
-	}
+	if (data->a)
+		free(data->a);
+	if (data->b)
+		free(data->b);
+}
+
+void	exit_error(t_data *data)
+{
+	free_memory(data);
+	ft_print_string("Error\n");
+	exit(1);
 }

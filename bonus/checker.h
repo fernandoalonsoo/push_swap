@@ -18,24 +18,29 @@
 # include <stdio.h>
 # include "./get_next_line/get_next_line.h"
 
-typedef struct s_sizes
+typedef struct s_data
 {
-	int	size_a;
-	int	size_b;
-}	t_sizes;
+	int		*a;
+	int		*b;
+	char	**array;
+	int		free_array_flag;
+	int		size_a;
+	int		size_b;
+}	t_data;
 
-void	checker(int *a, int *b, int n);
+void	checker(t_data *data);
 
 /* Validation */
-void	repeated(int *a, int size);
-void	check_range(long a);
-int		ordered(int *a, int size);
+void	repeated(t_data *data);
+void	check_range(long a, t_data *data);
+int		ordered(t_data *data);
 
 /* Utils */
 char	**ft_split(char const *s, char c, int *n);
 long	ft_atol(const char *str);
 int		ft_print_string(const char *str);
 void	ft_error_exit(char *msg, int fd);
+void	exit_error(t_data *data);
 
 /* Operations */
 void	pa(int *a, int *size_a, int *b, int *size_b);

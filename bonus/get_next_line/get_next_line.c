@@ -15,9 +15,8 @@
 static char	*ft_check_remainder(char **remainder);
 static void	ft_remainder(int fd, char *buffer, size_t bytes, char **remainder);
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, char **remainder)
 {
-	static char	*remainder = NULL;
 	char		*buffer;
 	ssize_t		bytes_read;
 	char		*line;
@@ -31,12 +30,12 @@ char	*get_next_line(int fd)
 	if (bytes_read < 0)
 	{
 		free(buffer);
-		free(remainder);
+		free(*remainder);
 		remainder = NULL;
 		return (NULL);
 	}
-	ft_remainder(fd, buffer, bytes_read, &remainder);
-	line = ft_check_remainder(&remainder);
+	ft_remainder(fd, buffer, bytes_read, remainder);
+	line = ft_check_remainder(remainder);
 	return (line);
 }
 

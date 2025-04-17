@@ -3,7 +3,7 @@ NAME = push_swap
 BONUSNAME = checker
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 	SRCS = 	src/push_swap.c \
 			src/validation_functions.c \
