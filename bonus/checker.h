@@ -18,6 +18,12 @@
 # include <stdio.h>
 # include "./get_next_line/get_next_line.h"
 
+typedef struct s_sizes
+{
+	int	size_a;
+	int	size_b;
+}	t_sizes;
+
 void	checker(int *a, int *b, int n);
 
 /* Validation */

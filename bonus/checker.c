@@ -50,7 +50,6 @@ void	initialise_stacks(int n, char **array, int *a, int *b)
 	long	aux;
 
 	i = 0;
-	repeated(a, n);
 	while (i < n)
 	{
 		aux = ft_atol(array[i]);
@@ -59,6 +58,7 @@ void	initialise_stacks(int n, char **array, int *a, int *b)
 		b[i] = 0;
 		i++;
 	}
+	repeated(a, n);
 }
 
 void	free_memory(int **a, int **b, char **array, int free_array_flag)
