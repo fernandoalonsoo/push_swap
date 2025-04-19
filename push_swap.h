@@ -36,14 +36,21 @@ typedef struct s_stacks
 	t_node	*b;
 }	t_stacks;
 
+typedef struct s_aux
+{
+	char	**array;
+	int		n;
+	int		free_array_flag;
+}	t_aux;
+
 void	print_stack(t_node *stack);
 
 /* Funciones de validación */
-void	repeated(t_node *a);
-void	check_range(long a);
+void	repeated(t_node *a, t_stacks *st, t_aux *aux);
+void	check_range(long a, t_stacks *st, t_aux *aux);
 int		ordered(t_node *a);
 int		stack_len(t_node *stack);
-void	ft_error_exit(char *msg, int fd);
+void	ft_error_exit(t_stacks *st, t_aux *aux, char *msg, int fd);
 
 /* Algoritmo */
 void	optimize(t_stacks *st);
@@ -51,8 +58,7 @@ void	turk_algorithm(t_stacks *st, int len_a);
 void	calculate_scores(t_stacks *st);
 
 /* Funciones para la gestión de los stacks */
-void	initialise_stacks(t_stacks *st, int n, char **array);
-void	free_memory(t_stacks *st, char **array, int free_array_flag);
+void	free_memory(t_stacks *st, t_aux *aux);
 void	get_index(t_node *st);
 void	rotate_both(t_stacks *st, t_node *cheapest_node);
 void	rev_rotate_both(t_stacks *st, t_node *cheapest_node);

@@ -13,10 +13,8 @@
 #include "../push_swap.h"
 #include "./utils/utils.h"
 
-void	initialise_stacks(t_stacks *st, int n, char **array);
-void	initialise_values(t_node *new_node, long aux, t_node *prev_node);
-void	free_memory(t_stacks *st, char **array, int free_array_flag);
-void	ft_error_exit(char *msg, int fd);
+void	initialise_stacks(t_stacks *st, t_aux *aux);
+void	initialise_values(t_node *new_node, long val, t_node *prev_node);
 
 /*void	print_stack(t_node *stack)
 {
@@ -33,36 +31,36 @@ void	ft_error_exit(char *msg, int fd);
 
 int	main(int argc, char *argv[])
 {
-	char		**array;
+	t_aux		aux;
 	t_stacks	st;
-	int			n;
-	int			free_array_flag;
 
 	if (argc == 1)
-		exit(0);
+		return (0);
 	if (argc == 2)
 	{
-		array = ft_split(argv[1], ' ', &n);
-		free_array_flag = 1;
+		aux.array = ft_split(argv[1], ' ', &aux.n);
+		aux.free_array_flag = 1;
 	}
 	else
 	{
-		n = argc - 1;
-		array = argv + 1;
-		free_array_flag = 0;
+		aux.n = argc - 1;
+		aux.array = argv + 1;
+		aux.free_array_flag = 0;
 	}
-	initialise_stacks(&st, n, array);
-	repeated(st.a);
+	initialise_stacks(&st, &aux);
+	if (aux.n == 0)
+		ft_error_exit(&st, &aux, "Error\n", 2);
+	repeated(st.a, &st, &aux);
 	if (!ordered(st.a))
-		turk_algorithm(&st, stack_len(st.a));
-	free_memory(&st, array, free_array_flag);
+		turk_algorithm(&st, aux.n);
+	free_memory(&st, &aux);
 	return (0);
 }
 
-void	initialise_stacks(t_stacks *st, int n, char **array)
+void	initialise_stacks(t_stacks *st, t_aux *aux)
 {
 	int		i;
-	long	aux;
+	long	val;
 	t_node	*new_node;
 	t_node	*prev_node;
 
@@ -70,24 +68,26 @@ void	initialise_stacks(t_stacks *st, int n, char **array)
 	st->b = NULL;
 	prev_node = NULL;
 	i = 0;
-	while (i < n)
+	while (i < aux->n)
 	{
-		aux = ft_atol(array[i]);
-		i++;
-		check_range(aux);
+		val = ft_atol(aux->array[i]);
+		if (val == 2147483648)
+			ft_error_exit(st, aux, "Error\n", 2);
+		check_range(val, st, aux);
 		new_node = malloc(sizeof(t_node));
-		initialise_values(new_node, aux, prev_node);
+		initialise_values(new_node, val, prev_node);
 		if (!st->a)
 			st->a = new_node;
 		else
 			prev_node->next = new_node;
 		prev_node = new_node;
+		i++;
 	}
 }
 
-void	initialise_values(t_node *new_node, long aux, t_node *prev_node)
+void	initialise_values(t_node *new_node, long val, t_node *prev_node)
 {
-	new_node->n = (int)aux;
+	new_node->n = (int)val;
 	new_node->index = 0;
 	new_node->score = 0;
 	new_node->top_median = 0;
@@ -97,40 +97,41 @@ void	initialise_values(t_node *new_node, long aux, t_node *prev_node)
 	new_node->prev = prev_node;
 }
 
-void	free_memory(t_stacks *st, char **array, int free_array_flag)
+void	free_memory(t_stacks *st, t_aux *aux)
 {
+	t_node	*tmp;
 	int		i;
-	t_node	*temp;
 
-	if (free_array_flag && array)
+	if (aux->free_array_flag && aux->array)
 	{
 		i = 0;
-		while (array[i])
+		while (aux->array[i])
 		{
-			free(array[i]);
+			free(aux->array[i]);
 			i++;
 		}
-		free(array);
+		free(aux->array);
 	}
 	while (st->a)
 	{
-		temp = st->a;
+		tmp = st->a;
 		st->a = st->a->next;
-		free(temp);
+		free(tmp);
 	}
 	while (st->b)
 	{
-		temp = st->b;
+		tmp = st->b;
 		st->b = st->b->next;
-		free(temp);
+		free(tmp);
 	}
 }
 
-void	ft_error_exit(char *msg, int fd)
+void	ft_error_exit(t_stacks *st, t_aux *aux, char *msg, int fd)
 {
+	free_memory(st, aux);
 	if (fd == 1)
 		ft_print_string(msg);
 	else
-		ft_putstr_fd(msg, 2);
-	exit(0);
+		ft_putstr_fd(msg, fd);
+	exit(1);
 }

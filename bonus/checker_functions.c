@@ -13,6 +13,7 @@
 #include "checker.h"
 
 void	do_operation(char *line, t_data *data);
+void	do_operation2(char *line, t_data *data);
 int		ft_strcmp(const char *s1, const char *s2);
 
 void	checker(t_data *data)
@@ -47,7 +48,13 @@ void	do_operation(char *line, t_data *data)
 		rb(data->b, data->size_b);
 	else if (ft_strcmp(line, "rr\n") == 0)
 		rr(data->a, data->size_a, data->b, data->size_b);
-	else if (ft_strcmp(line, "rra\n") == 0)
+	else
+		do_operation2(line, data);
+}
+
+void	do_operation2(char *line, t_data *data)
+{
+	if (ft_strcmp(line, "rra\n") == 0)
 		rra(data->a, data->size_a);
 	else if (ft_strcmp(line, "rrb\n") == 0)
 		rrb(data->b, data->size_b);
@@ -57,10 +64,12 @@ void	do_operation(char *line, t_data *data)
 		sa(data->a, data->size_a);
 	else if (ft_strcmp(line, "sb\n") == 0)
 		sb(data->b, data->size_b);
+	else if (ft_strcmp(line, "ss\n") == 0)
+		ss(data->a, data->size_a, data->b, data->size_b);
 	else
 	{
 		free(line);
-		exit_error(data);
+		exit_error(data, 2);
 	}
 }
 

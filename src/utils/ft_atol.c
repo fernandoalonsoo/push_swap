@@ -41,7 +41,7 @@ long	ft_atol(const char *str)
 	{
 		result = result * 10 + (str[i++] - '0');
 	}
-	if (str[i] != '\0')
-		ft_error_exit("Error\n", 2);
+	if (str[i] != '\0' || !('0' <= str[i - 1] && str[i - 1] <= '9'))
+		return (2147483648);
 	return (result * sign);
 }

@@ -14,7 +14,6 @@
 
 void	initialise_stacks(t_data *data);
 void	free_memory(t_data *data);
-void	exit_error(t_data *data);
 
 int	main(int argc, char *argv[])
 {
@@ -26,7 +25,7 @@ int	main(int argc, char *argv[])
 	data.free_array_flag = 0;
 	data.size_a = 0;
 	if (argc == 1)
-		exit(0);
+		return (0);
 	if (argc == 2)
 	{
 		data.array = ft_split(argv[1], ' ', &data.size_a);
@@ -37,8 +36,8 @@ int	main(int argc, char *argv[])
 		data.size_a = argc - 1;
 		data.array = argv + 1;
 	}
-	data.a = malloc(sizeof(int) * data.size_a);
-	data.b = malloc(sizeof(int) * data.size_a);
+	if (data.size_a == 0)
+		exit_error(&data, 2);
 	initialise_stacks(&data);
 	checker(&data);
 	free_memory(&data);
@@ -51,10 +50,14 @@ void	initialise_stacks(t_data *data)
 	long	aux;
 
 	i = 0;
+	data -> a = malloc(sizeof(int) * data -> size_a);
+	data -> b = malloc(sizeof(int) * data -> size_a);
 	data -> size_b = 0;
 	while (i < data->size_a)
 	{
 		aux = ft_atol(data->array[i]);
+		if (aux == 2147483648)
+			exit_error(data, 2);
 		check_range(aux, data);
 		data->a[i] = (int)aux;
 		data->b[i] = 0;
@@ -80,9 +83,9 @@ void	free_memory(t_data *data)
 		free(data->b);
 }
 
-void	exit_error(t_data *data)
+void	exit_error(t_data *data, int fd)
 {
 	free_memory(data);
-	ft_print_string("Error\n");
+	ft_putstr_fd("Error\n", fd);
 	exit(1);
 }

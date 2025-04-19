@@ -24,7 +24,7 @@ void	repeated(t_data *data)
 		while (j < data->size_a)
 		{
 			if (data->a[i] == data->a[j])
-				exit_error(data);
+				exit_error(data, 2);
 			j++;
 		}
 		i++;
@@ -34,7 +34,7 @@ void	repeated(t_data *data)
 void	check_range(long a, t_data *data)
 {
 	if ((a < -2147483648) || (a > 2147483647))
-		exit_error(data);
+		exit_error(data, 2);
 }
 
 int	ordered(t_data *data)

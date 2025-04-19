@@ -40,7 +40,8 @@ char	**ft_split(char const *s, char c, int *n);
 long	ft_atol(const char *str);
 int		ft_print_string(const char *str);
 void	ft_error_exit(char *msg, int fd);
-void	exit_error(t_data *data);
+void	exit_error(t_data *data, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 /* Operations */
 void	pa(int *a, int *size_a, int *b, int *size_b);

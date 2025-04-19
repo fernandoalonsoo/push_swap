@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void	repeated(t_node *a)
+void	repeated(t_node *a, t_stacks *st, t_aux *aux)
 {
 	t_node	*current;
 	t_node	*checker;
@@ -24,17 +24,17 @@ void	repeated(t_node *a)
 		while (checker)
 		{
 			if (current->n == checker->n)
-				ft_error_exit("Error\n", 2);
+				ft_error_exit(st, aux, "Error\n", 2);
 			checker = checker->next;
 		}
 		current = current->next;
 	}
 }
 
-void	check_range(long a)
+void	check_range(long a, t_stacks *st, t_aux *aux)
 {
 	if ((a < -2147483648) || (2147483647 < a))
-		ft_error_exit("Error\n", 2);
+		ft_error_exit(st, aux, "Error\n", 2);
 }
 
 int	ordered(t_node *a)
